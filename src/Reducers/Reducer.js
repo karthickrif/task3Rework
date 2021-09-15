@@ -35,24 +35,6 @@ const LoginReducer = (state = initialState, action) => {
 };
 export default LoginReducer;
 
-export const GetClientTable = () => (dispatch, getState) => {
-  const token = getState().LoginReducer.authToken;
-  // console.log("GetUserTable",token);
-  axios({
-    method: 'GET',
-    url:'https://staging-api.esquiretek.com/clients',
-    headers: {
-      authorization: token
-    }
-  })
-    .then(response => {
-      // console.log('GetUserTable_response', response);
-      dispatch(getClientData(response.data));
-    })
-    .catch(error => {
-      console.log("err",error);
-    });
-};
 
 export const GetCasesTable = () => (dispatch, getState) => {
   const token = getState().LoginReducer.authToken;

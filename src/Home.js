@@ -17,10 +17,10 @@ import ClientsTable from './HomeComponents/Clients';
 import CasesTable from './HomeComponents/Cases';
 import UsersTable from './HomeComponents/Users';
 import {
-  GetClientTable,
   GetCasesTable,
   GetUsersTable
 } from './Reducers/Reducer';
+import  GetClientTable from './Reducers/ClientReducer';
 import {
   BrowserRouter as Router,
   Route,
@@ -29,7 +29,6 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
-
 
 function HomePage(props) {
   const { dispatch, data, sessionData } = props;
