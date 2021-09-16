@@ -42,6 +42,7 @@ function ClientsTable(props) {
   function handleDelete(obj) {
     console.log('Index', obj);
     dispatch(removeClientData(obj));
+    dispatch(ModifyClient());
   }
 
   function handleEdit(obj) {
@@ -118,7 +119,7 @@ function ClientsTable(props) {
                     </IconButton>
                   </TableCell>
                   <TableCell align="left">
-                    <IconButton id={index} onClick={() => handleDelete(index)}>
+                    <IconButton id={index} onClick={() => handleDelete(values.id)}>
                       <DeleteOutlineIcon />
                     </IconButton>
                   </TableCell>

@@ -1,12 +1,11 @@
 import _ from 'lodash';
 import Object from 'lodash/Object';
 import Array from 'lodash/Array';
-import { getClientData,getCasesData,getUsersData} from '../Action';
+import { getClientData,appendClientData,removeClientData} from '../Action';
 import axios from 'axios';
 const clientState = {
   clientData: []
 };
-var method,formData;
 const ClientReducer = (state = clientState, action) => {
   switch (action.type) {
     case 'GetClientData':
@@ -15,20 +14,21 @@ const ClientReducer = (state = clientState, action) => {
       };
     case 'AppendClientData':
       var temp = _.concat(state.clientData, action.value);
-      method = "POST";
-      formData = action.value;
       return {
-        clientData: temp,
+        clientData: action.value.id != undefined ? temp : state.clientData,
         method : "POST",
         formData : action.value,
+        actionUrl : 'https://staging-api.esquiretek.com/clients',
       };
     case 'removeClientData':
-      var item = state.clientData.splice(action.value, 1);
-      temp = _.remove(state.clientData, function(n) {
-        return _.find(item);
+      temp =  _.filter(state.clientData,function(n){
+        return n.id != action.value.id;
       });
+      console.log("DeleteID", temp);
       return {
-        clientData: temp
+        clientData: temp,
+        method : "DELETE",
+        actionUrl : 'https://staging-api.esquiretek.com/clients/'+action.value,
       };
     case 'editClientData':
       let updatedState = _.map(state.clientData, (stateItem, index) => {
@@ -70,19 +70,23 @@ export const ModifyClient = () => (dispatch, getState) => {
   const token = getState().LoginReducer.authToken;
   const method = getState().ClientReducer.method;
   let formData = getState().ClientReducer.formData;
-  formData = JSON.stringify(formData);
-  console.log("ModifyClient",method,formData);
+  const actionUrl = getState().ClientReducer.actionUrl;
+  console.log("ModifyClient",method,formData,actionUrl);
   axios({
-    method: 'POST',
-    url:'https://staging-api.esquiretek.com/clients',
+    method: method,
+    url : actionUrl,
     headers: {
       authorization: token
     },
-    data : formData,
+    data : JSON.stringify(formData),
   })
     .then(response => {
       console.log('ModifyClient_response', response);
-      // dispatch(getClientData(response.data));
+      if(method == 'POST'){
+        dispatch(appendClientData(response.data));
+      }else if(method == 'DELETE'){
+        dispatch(removeClientData(response.data));
+      }
     })
     .catch(error => {
       console.log("err",error);

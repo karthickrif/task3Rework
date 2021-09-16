@@ -34,14 +34,14 @@ export function getUsersData(val) {
 export function appendClientData(val) {
   return {
     type: 'AppendClientData',
-    value: [val]
+    value: val
   };
 }
 
 export function removeClientData(val) {
   return {
     type: 'removeClientData',
-    value: [val]
+    value: val
   };
 }
 
