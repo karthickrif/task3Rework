@@ -119,17 +119,17 @@ function HomePage(props) {
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/clients" className="homeLink">
-                      <Button onClick={getdata}>Clients</Button>
+                      <Button onClick={getdata}className="sideBarBtn">Clients</Button>
                     </Link>
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/cases" className="homeLink">
-                      <Button onClick={getCases}>Cases</Button>
+                      <Button onClick={getCases} className="sideBarBtn">Cases</Button>
                     </Link>
                   </Grid>
                   <Grid item className="leftsidebarOptions">
                     <Link to="/home/users" className="homeLink">
-                      <Button onClick={getUsers}>Users</Button>
+                      <Button onClick={getUsers} className="sideBarBtn">Users</Button>
                     </Link>
                   </Grid>
                 </div>

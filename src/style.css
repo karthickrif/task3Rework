@@ -143,6 +143,16 @@ select {
   width: 30px !important;
   height: 30px !important;
 }
+.sideBarBtn {
+  /* font-size: 20px !important;
+  color: rgb(0, 122, 255, 0.9);
+  font-family: Arial, Helvetica, sans-serif; */
+  width: 100%;
+}
+.MuiButton-label {
+  display: block;
+  text-align: left;
+}
 @media screen and (max-width: 767px) {
   .login_Card {
     padding: 50px 20px;
