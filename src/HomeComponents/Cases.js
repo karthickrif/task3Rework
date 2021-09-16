@@ -36,7 +36,6 @@ function CasesTable(props) {
   };
 
   function handleDelete(obj) {
-    console.log('Index', obj);
     dispatch(removeCasesData(obj));
     setProgStatus(true);
     setTimeout(() => setProgStatus(false), 2000);
@@ -70,10 +69,8 @@ function CasesTable(props) {
   ) {
     var casesdata = dialogStatus.dispatchValue;
     if (dialogStatus.editStatus == false) {
-      // console.log('Append');
       dispatch(appendCasesData(casesdata));
     } else {
-      // console.log('Delete');
       dispatch(editCasesData(casesdata, dialogStatus.editIndex));
     }
     setDialogStatus({

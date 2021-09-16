@@ -15,7 +15,6 @@ function* loginAsync(action) {
     yield put({ type : 'FailedAuthToken' , value: authData, status : "failed"})
     yield delay(5000);
     yield put({ type : 'FailedAuthToken' , value: authData, status : ""});
-    console.log('failed',authData);
   }
 }
 

@@ -75,7 +75,7 @@ export const GetUsersTable = () => async (dispatch, getState) => {
       dispatch(getUsersData(response.data));
     })
     .catch(error => {
-      console.log(error);
+      // console.log(error);
     });
 };
 
@@ -85,7 +85,7 @@ export const ModifyUser = () => (dispatch, getState) => {
   let formData = getState().UsersReducer.formData;
   const actionUrl = getState().UsersReducer.actionUrl;
   const userId = getState().UsersReducer.userId;
-  console.log("ModifyUser",method,formData,actionUrl);
+  // console.log("ModifyUser",method,formData,actionUrl);
   axios({
     method: method,
     url: actionUrl,
@@ -95,7 +95,7 @@ export const ModifyUser = () => (dispatch, getState) => {
     data: JSON.stringify(formData)
   })
     .then(response => {
-      console.log('ModifyUser_response', response);
+      // console.log('ModifyUser_response', response);
       if (method == 'POST') {
         dispatch(appendUserData(response.data));
       } else if (method == 'DELETE') {
@@ -105,6 +105,6 @@ export const ModifyUser = () => (dispatch, getState) => {
       }
     })
     .catch(error => {
-      console.log('err', error);
+      // console.log('err', error);
     });
 };

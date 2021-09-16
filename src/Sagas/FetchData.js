@@ -29,11 +29,11 @@ export function FetchfromSessionApi(obj) {
     }
   })
     .then(response => {
-      console.log('sessionApi', response);
+      // console.log('sessionApi', response);
       return response.data;
     })
     .catch(error => {
-      console.log(error);
+      // console.log(error);
     });
   return request;
 }

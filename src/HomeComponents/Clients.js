@@ -42,7 +42,6 @@ function ClientsTable(props) {
   };
 
   function handleDelete(obj) {
-    console.log('Index', obj);
     dispatch(removeClientData(obj));
     dispatch(ModifyClient());
     setProgStatus(true);
@@ -77,11 +76,9 @@ function ClientsTable(props) {
   ) {
     var clientdata = dialogStatus.dispatchValue;
     if (dialogStatus.editStatus == false) {
-      // console.log('Append');
       dispatch(appendClientData(clientdata));
       dispatch(ModifyClient());
     } else {
-      // console.log('Delete');
       dispatch(editClientData(clientdata, clientdata.id));
       dispatch(ModifyClient());
     }

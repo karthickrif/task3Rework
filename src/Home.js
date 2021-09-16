@@ -88,7 +88,7 @@ function HomePage(props) {
   return (
     <div>
       <Router>
-        <Grid container spacing={8}>
+        <Grid container spacing={1}>
           <Grid
             item
             xs={3}
@@ -100,7 +100,7 @@ function HomePage(props) {
           >
             <Grid
               container
-              spacing={3}
+              spacing={2}
               direction="column"
               className="Home_leftsidebar"
             >

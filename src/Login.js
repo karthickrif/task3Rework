@@ -43,7 +43,6 @@ function LoginPage(props) {
         snackStatus: loginData.snackStatus
       });
     }
-    // console.log(sessionData);
   }
   function passLoginData() {
     loginData != undefined

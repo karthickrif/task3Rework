@@ -20,8 +20,6 @@ const CasesReducer = (state = casesState, action) => {
       };
     case 'AppendCasesData':
       var temp = _.concat(state.casesData, action.value);
-      // console.log(temp);
-      // console.log(JSON.stringify(temp));
       return {
         casesData: temp
       };
@@ -52,7 +50,6 @@ export default CasesReducer;
 
 export const GetCasesTable = () => (dispatch, getState) => {
   const token = getState().LoginReducer.authToken;
-  console.log("GetCasesTable",token);
   axios({
     url: 'https://staging-api.esquiretek.com/cases',
     method: 'GET',
@@ -61,10 +58,10 @@ export const GetCasesTable = () => (dispatch, getState) => {
     }
   })
     .then(response => {
-      console.log('GetCasesTable_response', response);
+      // console.log('GetCasesTable_response', response);
       dispatch(getCasesData(response.data));
     })
     .catch(error => {
-      console.log(error);
+      // console.log(error);
     });
 };

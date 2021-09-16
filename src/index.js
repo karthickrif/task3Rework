@@ -25,7 +25,8 @@ function Main() {
   const sagaMiddleware = createSagaMiddleware();
   let store = createStore(rootReducer, applyMiddleware(thunk, sagaMiddleware));
   sagaMiddleware.run(rootSaga);
-  store.subscribe(() => console.log('Store : ', store.getState()));
+  store.subscribe(() => store.getState());
+  // store.subscribe(() => console.log('Store : ', store.getState()));
   return (
     <Provider store={store}>
       <App />

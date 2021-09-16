@@ -47,7 +47,6 @@ export function removeClientData(val) {
 }
 
 export function editClientData(val, index,status) {
-  console.log('EditAction', val, index);
   return {
     type: 'editClientData',
     value: val,
@@ -94,7 +93,6 @@ export function removeUserData(val) {
 }
 
 export function editUserData(val, index,status) {
-  // console.log('EditAction', val, index);
   return {
     type: 'EditUserData',
     value: val,

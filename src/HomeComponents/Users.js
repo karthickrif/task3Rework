@@ -74,11 +74,9 @@ function UsersTable(props) {
   ) {
     var userdata = dialogStatus.dispatchValue;
     if (dialogStatus.editStatus == false) {
-      // console.log('Append');
       dispatch(appendUserData(userdata));
       dispatch(ModifyUser());
     } else {
-      // console.log('Delete');
       dispatch(editUserData(userdata, userdata.id));
       dispatch(ModifyUser());
     }

@@ -1,6 +1,5 @@
-h1,
-p {
-  font-family: Lato;
+body {
+  margin: 0 !important;
 }
 .login_Card {
   padding: 50px;
@@ -121,6 +120,8 @@ select {
 }
 .DataTable {
   box-shadow: 1px 1px rgb(220, 220, 220, 0.8), -1px -1px rgb(220, 220, 220, 0.8) !important;
+  width: 96% !important;
+  margin: 0 2% !important;
 }
 .loginFormControl {
   width: 100% !important;
@@ -130,7 +131,8 @@ select {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 25px;
-  margin: 20px 0;
+  width: 96% !important;
+  margin: 20px 2% !important;
 }
 .UserName {
   color: rgb(0, 122, 255);
