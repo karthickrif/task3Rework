@@ -16,11 +16,10 @@ var logo;
 import ClientsTable from './HomeComponents/Clients';
 import CasesTable from './HomeComponents/Cases';
 import UsersTable from './HomeComponents/Users';
-import {
-  GetCasesTable,
-  GetUsersTable
-} from './Reducers/Reducer';
 import  {GetClientTable} from './Reducers/ClientReducer';
+import  {GetCasesTable} from './Reducers/CasesReducer';
+import  {GetUsersTable} from './Reducers/UsersReducer';
+
 import {
   BrowserRouter as Router,
   Route,

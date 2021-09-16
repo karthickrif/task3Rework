@@ -102,7 +102,7 @@ function UsersForm(props) {
         <div className="compart">
           <label htmlFor="isAdmin">Admin</label>
 
-          <Field name="is_admin" component="input" type="checkbox" format={v => v === '1'}  normalize={v => v ? '1' : '0'} />
+          <Field name="is_admin" component="input" type="checkbox" format={v => v === 1}  normalize={v => v ? 1 : 0} />
         </div>
       </div>
       <div className="button_area">

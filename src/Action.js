@@ -18,6 +18,7 @@ export function getClientData(val) {
 }
 
 export function getCasesData(val) {
+  console.log("getCasesData",val)
   return {
     type: GET_CASESDATA,
     value: val
@@ -45,12 +46,13 @@ export function removeClientData(val) {
   };
 }
 
-export function editClientData(val, index) {
+export function editClientData(val, index,status) {
   console.log('EditAction', val, index);
   return {
     type: 'editClientData',
     value: val,
-    clientId: index
+    clientId: index,
+    status : status,
   };
 }
 
@@ -80,30 +82,24 @@ export function editCasesData(val, index) {
 export function appendUserData(val) {
   return {
     type: 'AppendUserData',
-    value: [val]
+    value: val
   };
 }
 
 export function removeUserData(val) {
   return {
     type: 'RemoveUserData',
-    value: [val]
+    value: val
   };
 }
 
-export function editUserData(val, index) {
+export function editUserData(val, index,status) {
   // console.log('EditAction', val, index);
   return {
     type: 'EditUserData',
     value: val,
-    index: index
+    clientId: index,
+    status : status,
   };
 }
 
-
-export function getUserData(val) {
-  return {
-    type: GET_USERDATA,
-    value: val
-  };
-}

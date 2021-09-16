@@ -1,4 +1,4 @@
-import { getClientData,getCasesData,getUsersData} from '../Action';
+import { getClientData, getCasesData, getUsersData } from '../Action';
 import axios from 'axios';
 const initialState = {
   loginData: {}
@@ -26,8 +26,8 @@ const LoginReducer = (state = initialState, action) => {
         loginData: state.loginData,
         sessionData: state.sessionData,
         authToken: state.authToken,
-        authStatus : action.status,
-        authStatusData : action.value,
+        authStatus: action.status,
+        authStatusData: action.value
       };
     default:
       return state;
@@ -35,39 +35,3 @@ const LoginReducer = (state = initialState, action) => {
 };
 export default LoginReducer;
 
-
-export const GetCasesTable = () => (dispatch, getState) => {
-  const token = getState().LoginReducer.authToken;
-  // console.log("GetUserTable",token);
-   axios({url : 'https://staging-api.esquiretek.com/cases',
-    method: 'GET',
-    headers: {
-      authorization: token
-    }
-  })
-    .then(response => {
-      // console.log('GetCasesTable_response', response);
-      dispatch(getCasesData(response.data));
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-export const GetUsersTable = () => async (dispatch, getState) => {
-  const token = getState().LoginReducer.authToken;
-  // console.log("GetUserTable",token);
-   axios({url : 'https://staging-api.esquiretek.com/users',
-    method: 'GET',
-    headers: {
-      authorization: token
-    }
-  })
-    .then(response => {
-      // console.log('GetCasesTable_response', response);
-      dispatch(getUsersData(response.data));
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};

@@ -18,6 +18,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import UsersForm from '../Forms/UsersForm';
 import { appendUserData, removeUserData, editUserData } from '../Action';
+import  {ModifyUser} from '../Reducers/UsersReducer';
 
 function UsersTable(props) {
   const { dispatch, data, sessionData, usersData } = props;
@@ -39,6 +40,7 @@ function UsersTable(props) {
   function handleDelete(obj) {
     console.log('Index', obj);
     dispatch(removeUserData(obj));
+    dispatch(ModifyUser());
   }
 
   function handleEdit(obj) {
@@ -65,13 +67,15 @@ function UsersTable(props) {
     dialogStatus.dispatchStatus != undefined &&
     dialogStatus.dispatchStatus == true
   ) {
-    var clientdata = dialogStatus.dispatchValue;
+    var userdata = dialogStatus.dispatchValue;
     if (dialogStatus.editStatus == false) {
       // console.log('Append');
-      dispatch(appendUserData(clientdata));
+      dispatch(appendUserData(userdata));
+      dispatch(ModifyUser());
     } else {
       // console.log('Delete');
-      dispatch(editUserData(clientdata, dialogStatus.editIndex));
+      dispatch(editUserData(userdata, userdata.id));
+      dispatch(ModifyUser());
     }
     setDialogStatus({
       status: false,
@@ -114,7 +118,7 @@ function UsersTable(props) {
                     </IconButton>
                   </TableCell>
                   <TableCell align="left">
-                    <IconButton id={index} onClick={() => handleDelete(index)}>
+                    <IconButton id={index} onClick={() => handleDelete(values.id)}>
                       <DeleteOutlineIcon />
                     </IconButton>
                   </TableCell>
