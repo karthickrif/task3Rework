@@ -48,9 +48,13 @@ function LoginPage(props) {
     loginData != undefined
       ? dispatch(GetLoginData(loginData))
       : alert('Check entered values');
-    setLoginData({ progressStatus: true });
+    setLoginData({email: loginData.email,
+      password: loginData.password,
+      reactivation_token: false, progressStatus: true });
     setTimeout(() => {
-      setLoginData({ progressStatus: false });
+      setLoginData({email: loginData.email,
+        password: loginData.password,
+        reactivation_token: false, progressStatus: false });
     }, 5000);
   }
 
