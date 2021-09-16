@@ -76,7 +76,8 @@ function ClientsTable(props) {
       dispatch(ModifyClient());
     } else {
       // console.log('Delete');
-      dispatch(editClientData(clientdata, dialogStatus.editIndex));
+      dispatch(editClientData(clientdata, clientdata.id));
+      dispatch(ModifyClient());
     }
     setDialogStatus({
       status: false,

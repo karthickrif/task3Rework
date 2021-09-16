@@ -46,11 +46,11 @@ export function removeClientData(val) {
 }
 
 export function editClientData(val, index) {
-  // console.log('EditAction', val, index);
+  console.log('EditAction', val, index);
   return {
     type: 'editClientData',
     value: val,
-    index: index
+    clientId: index
   };
 }
 

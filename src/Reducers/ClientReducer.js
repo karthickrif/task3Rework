@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Object from 'lodash/Object';
 import Array from 'lodash/Array';
-import { getClientData,appendClientData,removeClientData} from '../Action';
+import { getClientData,appendClientData,removeClientData,editClientData} from '../Action';
 import axios from 'axios';
 const clientState = {
   clientData: []
@@ -24,21 +24,24 @@ const ClientReducer = (state = clientState, action) => {
       temp =  _.filter(state.clientData,function(n){
         return n.id != action.value.id;
       });
-      console.log("DeleteID", temp);
       return {
         clientData: temp,
         method : "DELETE",
         actionUrl : 'https://staging-api.esquiretek.com/clients/'+action.value,
       };
     case 'editClientData':
-      let updatedState = _.map(state.clientData, (stateItem, index) => {
-        if (index == action.index) {
-          stateItem = action.value;
+      let updatedState = _.map(state.clientData, values => {
+        if(action.clientId == values.id){
+          console.log("Match",action.clientId,values.id)
         }
-        return stateItem;
+        console.log("NotMatch",action.clientId,values.id)
       });
       return {
-        clientData: updatedState
+        clientData: state.clientData,
+        method : "PUT",
+        actionUrl : 'https://staging-api.esquiretek.com/clients/'+action.clientId,
+        formData : action.value,
+        clientId : action.clientId,
       };
     default:
       return state;
@@ -71,7 +74,8 @@ export const ModifyClient = () => (dispatch, getState) => {
   const method = getState().ClientReducer.method;
   let formData = getState().ClientReducer.formData;
   const actionUrl = getState().ClientReducer.actionUrl;
-  console.log("ModifyClient",method,formData,actionUrl);
+  const clientID = getState().ClientReducer,clientId;
+  // console.log("ModifyClient",method,formData,actionUrl);
   axios({
     method: method,
     url : actionUrl,
@@ -86,6 +90,8 @@ export const ModifyClient = () => (dispatch, getState) => {
         dispatch(appendClientData(response.data));
       }else if(method == 'DELETE'){
         dispatch(removeClientData(response.data));
+      }else if(method == 'PUT'){
+        dispatch(editClientData(response.data,clientID));
       }
     })
     .catch(error => {
