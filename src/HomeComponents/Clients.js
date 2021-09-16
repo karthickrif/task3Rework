@@ -10,7 +10,8 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  IconButton
+  IconButton,
+  CircularProgress,
 } from '@material-ui/core';
 import GetUserTable from '../Reducers/Reducer';
 import { connect } from 'react-redux';
@@ -20,14 +21,15 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import { reduxForm, Field } from 'redux-form';
 import ClientForm from '../Forms/ClientForm';
 import { appendClientData, removeClientData, editClientData } from '../Action';
-import  {ModifyClient} from '../Reducers/ClientReducer';
+import { ModifyClient } from '../Reducers/ClientReducer';
 
 function ClientsTable(props) {
   const { dispatch, data, sessionData, clientData } = props;
   const [dialogStatus, setDialogStatus] = useState({
     status: false,
-    editStatus: false
+    editStatus: false,
   });
+  const [progStatus, setProgStatus] = useState(false);
 
   const handleOpen = () => {
     setDialogStatus({ status: true, editStatus: false });
@@ -35,7 +37,7 @@ function ClientsTable(props) {
 
   const handleClose = () => {
     setDialogStatus({
-      status: false
+      status: false,
     });
   };
 
@@ -43,6 +45,8 @@ function ClientsTable(props) {
     console.log('Index', obj);
     dispatch(removeClientData(obj));
     dispatch(ModifyClient());
+    setProgStatus(true);
+    setTimeout(() => setProgStatus(false), 2000);
   }
 
   function handleEdit(obj) {
@@ -51,7 +55,7 @@ function ClientsTable(props) {
       dispatchStatus: false,
       dispatchValue: dialogStatus.dispatchValue,
       editStatus: true,
-      editIndex: obj
+      editIndex: obj,
     });
   }
 
@@ -61,8 +65,10 @@ function ClientsTable(props) {
       dispatchStatus: true,
       dispatchValue: values,
       editStatus: dialogStatus.editStatus,
-      editIndex: dialogStatus.editIndex
+      editIndex: dialogStatus.editIndex,
     });
+    setProgStatus(true);
+    setTimeout(() => setProgStatus(false), 2000);
   }
 
   if (
@@ -83,7 +89,7 @@ function ClientsTable(props) {
       status: false,
       dispatchStatus: false,
       dispatchValue: dialogStatus.dispatchValue,
-      editStatus: false
+      editStatus: false,
     });
   }
 
@@ -102,7 +108,9 @@ function ClientsTable(props) {
                 <AddCircleOutlineIcon />
               </IconButton>
             </TableCell>
-            <TableCell align="left" />
+            <TableCell align="left">
+              {progStatus == false ? '' : <CircularProgress className="tableProgress"/>}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -120,7 +128,10 @@ function ClientsTable(props) {
                     </IconButton>
                   </TableCell>
                   <TableCell align="left">
-                    <IconButton id={index} onClick={() => handleDelete(values.id)}>
+                    <IconButton
+                      id={index}
+                      onClick={() => handleDelete(values.id)}
+                    >
                       <DeleteOutlineIcon />
                     </IconButton>
                   </TableCell>
@@ -144,21 +155,18 @@ function ClientsTable(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     data: state.LoginReducer && state.LoginReducer.loginData,
     sessionData: state.LoginReducer && state.LoginReducer.sessionData,
-    clientData: state.ClientReducer && state.ClientReducer.clientData
+    clientData: state.ClientReducer && state.ClientReducer.clientData,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    dispatch
+    dispatch,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ClientsTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ClientsTable);

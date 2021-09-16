@@ -60,7 +60,7 @@ const renderSelectField = ({
 );
 
 function CasesForm(props) {
-  const { handleSubmit, pristine, reset, submitting, clientData } = props;
+  const { handleSubmit, pristine, reset, submitting, casesData } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div className="input_area">
@@ -69,7 +69,7 @@ function CasesForm(props) {
             <label htmlFor="clientID">Client ID</label>
             <Field name="client_id" type="input" component={renderSelectField}>
               <option>Select Any</option>
-              <option>option 1</option>
+              {casesData != undefined ? casesData.map(values => <option value={values.client_id}>{values.client_id}</option>) : <option>Default</option>}
             </Field>
           </div>
         </div>
@@ -140,7 +140,7 @@ const mapStateToProps = state => {
   return {
     data: state.LoginReducer && state.LoginReducer.loginData,
     sessionData: state.LoginReducer && state.LoginReducer.sessionData,
-    clientData: state.ClientReducer && state.ClientReducer.clientData
+    casesData: state.ClientReducer && state.ClientReducer.casesData
   };
 };
 

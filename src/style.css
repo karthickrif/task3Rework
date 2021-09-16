@@ -116,7 +116,8 @@ select {
 .error {
   color: red;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 14px !important;
+  margin: 0 0 5px 0;
 }
 .DataTable {
   box-shadow: 1px 1px rgb(220, 220, 220, 0.8), -1px -1px rgb(220, 220, 220, 0.8) !important;
@@ -134,6 +135,11 @@ select {
 .UserName {
   color: rgb(0, 122, 255);
   font-size: 30px;
+}
+.tableProgress {
+  color: rgb(0, 122, 255, 0.9) !important;
+  width: 30px !important;
+  height: 30px !important;
 }
 @media screen and (max-width: 767px) {
   .login_Card {
