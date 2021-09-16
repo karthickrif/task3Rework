@@ -20,7 +20,7 @@ import {
   GetCasesTable,
   GetUsersTable
 } from './Reducers/Reducer';
-import  GetClientTable from './Reducers/ClientReducer';
+import  {GetClientTable} from './Reducers/ClientReducer';
 import {
   BrowserRouter as Router,
   Route,

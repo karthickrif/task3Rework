@@ -17,7 +17,6 @@ const ClientReducer = (state = clientState, action) => {
       var temp = _.concat(state.clientData, action.value);
       method = "POST";
       formData = action.value;
-      GetClientTable()
       return {
         clientData: temp,
         method : "POST",
@@ -47,10 +46,10 @@ const ClientReducer = (state = clientState, action) => {
 };
 export default ClientReducer;
 
-const GetClientTable = () => (dispatch, getState) => {
+export const GetClientTable = () => (dispatch, getState) => {
   const token = getState().LoginReducer.authToken;
   const method = getState().ClientReducer.method;
-  console.log("GetUserTable",method);
+  // console.log("GetUserTable",method);
   axios({
     method: 'GET',
     url:'https://staging-api.esquiretek.com/clients',
@@ -63,7 +62,29 @@ const GetClientTable = () => (dispatch, getState) => {
       dispatch(getClientData(response.data));
     })
     .catch(error => {
+      // console.log("err",error);
+    });
+};
+
+export const ModifyClient = () => (dispatch, getState) => {
+  const token = getState().LoginReducer.authToken;
+  const method = getState().ClientReducer.method;
+  let formData = getState().ClientReducer.formData;
+  formData = JSON.stringify(formData);
+  console.log("ModifyClient",method,formData);
+  axios({
+    method: 'POST',
+    url:'https://staging-api.esquiretek.com/clients',
+    headers: {
+      authorization: token
+    },
+    data : formData,
+  })
+    .then(response => {
+      console.log('ModifyClient_response', response);
+      // dispatch(getClientData(response.data));
+    })
+    .catch(error => {
       console.log("err",error);
     });
 };
-export default GetClientTable;

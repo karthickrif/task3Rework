@@ -20,6 +20,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import { reduxForm, Field } from 'redux-form';
 import ClientForm from '../Forms/ClientForm';
 import { appendClientData, removeClientData, editClientData } from '../Action';
+import  {ModifyClient} from '../Reducers/ClientReducer';
 
 function ClientsTable(props) {
   const { dispatch, data, sessionData, clientData } = props;
@@ -71,6 +72,7 @@ function ClientsTable(props) {
     if (dialogStatus.editStatus == false) {
       // console.log('Append');
       dispatch(appendClientData(clientdata));
+      dispatch(ModifyClient());
     } else {
       // console.log('Delete');
       dispatch(editClientData(clientdata, dialogStatus.editIndex));
